@@ -1,103 +1,203 @@
-import Image from "next/image";
+import Link from 'next/link'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/Card'
+import { Button } from '@/components/ui/Button'
+import { Calculator, Home, Car, User, TrendingUp, BarChart3, Share, FileText } from 'lucide-react'
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="max-w-7xl mx-auto p-6">
+      {/* Hero Section */}
+      <div className="text-center py-12 mb-12">
+        <div className="flex justify-center items-center mb-6">
+          <Calculator className="h-16 w-16 text-blue-600 mr-4" />
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
+            Comprehensive Loan Calculators
+          </h1>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          Make informed financial decisions with our suite of professional loan calculators. 
+          Calculate payments, view amortization schedules, and compare scenarios with interactive charts and reports.
+        </p>
+      </div>
+
+      {/* Calculator Cards */}
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader>
+            <Home className="h-8 w-8 text-blue-600 mb-2" />
+            <CardTitle>Mortgage Calculator</CardTitle>
+            <CardDescription>
+              Calculate monthly payments, view amortization schedules, and analyze loan-to-value ratios
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link href="/mortgage">
+              <Button className="w-full">Calculate Mortgage</Button>
+            </Link>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader>
+            <Car className="h-8 w-8 text-green-600 mb-2" />
+            <CardTitle>Auto Loan Calculator</CardTitle>
+            <CardDescription>
+              Determine car payments with trade-in values, taxes, and additional fees included
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link href="/auto-loan">
+              <Button className="w-full bg-green-600 hover:bg-green-700">Calculate Auto Loan</Button>
+            </Link>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader>
+            <User className="h-8 w-8 text-purple-600 mb-2" />
+            <CardTitle>Personal Loan Calculator</CardTitle>
+            <CardDescription>
+              Calculate personal loan payments with origination fees and debt-to-income ratios
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link href="/personal-loan">
+              <Button className="w-full bg-purple-600 hover:bg-purple-700">Calculate Personal Loan</Button>
+            </Link>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader>
+            <TrendingUp className="h-8 w-8 text-orange-600 mb-2" />
+            <CardTitle>Investment Calculator</CardTitle>
+            <CardDescription>
+              Project investment growth with compound interest and inflation adjustments
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link href="/investment">
+              <Button className="w-full bg-orange-600 hover:bg-orange-700">Calculate Investment</Button>
+            </Link>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Features Section */}
+      <div className="bg-white rounded-lg shadow-sm p-8 mb-12">
+        <h2 className="text-3xl font-bold text-center mb-8 text-gray-900">Powerful Features</h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="text-center">
+            <BarChart3 className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Interactive Charts</h3>
+            <p className="text-gray-600">
+              Visualize payment breakdowns, amortization schedules, and loan comparisons with dynamic charts
+            </p>
+          </div>
+          
+          <div className="text-center">
+            <FileText className="h-12 w-12 text-green-600 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2">PDF Reports</h3>
+            <p className="text-gray-600">
+              Generate professional loan reports with payment schedules and analysis for your records
+            </p>
+          </div>
+          
+          <div className="text-center">
+            <Share className="h-12 w-12 text-purple-600 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Save & Share</h3>
+            <p className="text-gray-600">
+              Save calculations and share scenarios with colleagues, family, or financial advisors
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Credit Score Guide */}
+      <Card className="mb-12">
+        <CardHeader>
+          <CardTitle>Interest Rate Guide by Credit Score</CardTitle>
+          <CardDescription>
+            Typical interest rates you might qualify for based on your credit score range
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid md:grid-cols-5 gap-4">
+            <div className="text-center p-4 bg-green-50 rounded-lg">
+              <div className="font-bold text-green-700">Excellent</div>
+              <div className="text-sm text-gray-600 mb-2">800-850</div>
+              <div className="space-y-1 text-sm">
+                <div>Mortgage: ~6.5%</div>
+                <div>Auto: ~4.5%</div>
+                <div>Personal: ~6.0%</div>
+              </div>
+            </div>
+            
+            <div className="text-center p-4 bg-blue-50 rounded-lg">
+              <div className="font-bold text-blue-700">Very Good</div>
+              <div className="text-sm text-gray-600 mb-2">740-799</div>
+              <div className="space-y-1 text-sm">
+                <div>Mortgage: ~6.8%</div>
+                <div>Auto: ~5.2%</div>
+                <div>Personal: ~8.5%</div>
+              </div>
+            </div>
+            
+            <div className="text-center p-4 bg-yellow-50 rounded-lg">
+              <div className="font-bold text-yellow-700">Good</div>
+              <div className="text-sm text-gray-600 mb-2">670-739</div>
+              <div className="space-y-1 text-sm">
+                <div>Mortgage: ~7.2%</div>
+                <div>Auto: ~6.8%</div>
+                <div>Personal: ~12.5%</div>
+              </div>
+            </div>
+            
+            <div className="text-center p-4 bg-orange-50 rounded-lg">
+              <div className="font-bold text-orange-700">Fair</div>
+              <div className="text-sm text-gray-600 mb-2">580-669</div>
+              <div className="space-y-1 text-sm">
+                <div>Mortgage: ~8.1%</div>
+                <div>Auto: ~9.5%</div>
+                <div>Personal: ~18.0%</div>
+              </div>
+            </div>
+            
+            <div className="text-center p-4 bg-red-50 rounded-lg">
+              <div className="font-bold text-red-700">Poor</div>
+              <div className="text-sm text-gray-600 mb-2">300-579</div>
+              <div className="space-y-1 text-sm">
+                <div>Mortgage: ~9.5%</div>
+                <div>Auto: ~14.0%</div>
+                <div>Personal: ~25.0%</div>
+              </div>
+            </div>
+          </div>
+          <p className="text-sm text-gray-500 mt-4">
+            * Rates are approximate and vary by lender, loan amount, and other factors. Use as a general guide only.
+          </p>
+        </CardContent>
+      </Card>
+
+      {/* Get Started CTA */}
+      <div className="text-center bg-blue-600 text-white rounded-lg p-8">
+        <h2 className="text-2xl font-bold mb-4">Ready to Calculate Your Loan?</h2>
+        <p className="mb-6 text-blue-100">
+          Choose from our comprehensive calculators to make informed financial decisions
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link href="/mortgage">
+            <Button variant="outline" className="bg-white text-blue-600 border-white hover:bg-blue-50">
+              Start with Mortgage
+            </Button>
+          </Link>
+          <Link href="/auto-loan">
+            <Button variant="outline" className="bg-white text-blue-600 border-white hover:bg-blue-50">
+              Calculate Auto Loan
+            </Button>
+          </Link>
+        </div>
+      </div>
     </div>
-  );
+  )
 }
