@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Calculator, Home, Car, User, TrendingUp } from 'lucide-react'
+import { trackNavigation } from '@/lib/analytics'
 
 const navigation = [
   { name: 'Home', href: '/', icon: Home },
@@ -15,6 +16,11 @@ const navigation = [
 
 export default function Navigation() {
   const pathname = usePathname()
+
+  const handleNavClick = (destination: string) => {
+    const currentPage = pathname === '/' ? 'home' : pathname.slice(1)
+    trackNavigation(destination, currentPage)
+  }
 
   return (
     <nav className="bg-white shadow-lg border-b">
@@ -33,6 +39,7 @@ export default function Navigation() {
                   <Link
                     key={item.name}
                     href={item.href}
+                    onClick={() => handleNavClick(item.href === '/' ? 'home' : item.href.slice(1))}
                     className={cn(
                       'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors',
                       isActive
@@ -60,6 +67,7 @@ export default function Navigation() {
               <Link
                 key={item.name}
                 href={item.href}
+                onClick={() => handleNavClick(item.href === '/' ? 'home' : item.href.slice(1))}
                 className={cn(
                   'flex items-center px-3 py-2 rounded-md text-base font-medium transition-colors',
                   isActive

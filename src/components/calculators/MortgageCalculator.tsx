@@ -18,6 +18,7 @@ import { mortgageSchema, type MortgageFormData, creditScorePresets } from '@/lib
 import { calculateMortgage, formatCurrency, getBIRateBasedInterestRate, getIndonesianBankingInfo } from '@/lib/calculations'
 import { PDFReportGenerator, downloadPDF } from '@/lib/pdf-generator'
 import { FileDown, Share } from 'lucide-react'
+import { trackCalculatorUsage, trackPDFExport, trackFormInteraction } from '@/lib/analytics'
 
 export default function MortgageCalculator() {
   const searchParams = useSearchParams()
@@ -70,7 +71,20 @@ export default function MortgageCalculator() {
   // since watchedValues is a new object reference on every render
   const results = useMemo(() => {
     try {
-      return calculateMortgage(watchedValues)
+      const calculation = calculateMortgage(watchedValues)
+
+      // Track calculation event when we have valid results
+      if (calculation && watchedValues.loanAmount > 0) {
+        trackCalculatorUsage(
+          'mortgage',
+          'calculate',
+          watchedValues.loanAmount,
+          watchedValues.interestRate,
+          watchedValues.loanTermYears
+        )
+      }
+
+      return calculation
     } catch (error) {
       console.error('Calculation error:', error)
       return null
@@ -81,6 +95,7 @@ export default function MortgageCalculator() {
   const onSubmit = (data: MortgageFormData) => {
     // Form submission is handled automatically by the useMemo calculation
     // This function can be used for additional actions if needed
+    trackFormInteraction('mortgage', 'complete')
     console.log('Form submitted with data:', data)
   }
 
@@ -98,7 +113,10 @@ export default function MortgageCalculator() {
 
   const handleDownloadPDF = () => {
     if (!results) return
-    
+
+    // Track PDF export
+    trackPDFExport('mortgage', 'summary')
+
     const generator = new PDFReportGenerator()
     const pdfData = generator.generateMortgageReport(watchedValues, results)
     downloadPDF(pdfData, 'mortgage-report.pdf')

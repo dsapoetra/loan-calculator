@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/Button'
 import { personalLoanSchema, type PersonalLoanFormData, creditScorePresets } from '@/lib/schemas'
 import { calculatePersonalLoan, formatCurrency, formatPercent, getBIRateBasedInterestRate, getIndonesianBankingInfo } from '@/lib/calculations'
 import ComplianceAlert, { BIRateInfo } from '@/components/ui/ComplianceAlert'
+import { trackCalculatorUsage, trackFormInteraction } from '@/lib/analytics'
 
 export default function PersonalLoanCalculator() {
   const [results, setResults] = useState<ReturnType<typeof calculatePersonalLoan> | null>(null)
@@ -41,6 +42,17 @@ export default function PersonalLoanCalculator() {
     try {
       const calculation = calculatePersonalLoan(watchedValues)
       setResults(calculation)
+
+      // Track calculation event
+      if (calculation && watchedValues.loanAmount > 0) {
+        trackCalculatorUsage(
+          'personal-loan',
+          'calculate',
+          watchedValues.loanAmount,
+          watchedValues.interestRate,
+          watchedValues.loanTermMonths / 12 // convert months to years
+        )
+      }
     } catch (error) {
       console.error('Calculation error:', error)
       setResults(null)
@@ -51,6 +63,7 @@ export default function PersonalLoanCalculator() {
     try {
       const calculation = calculatePersonalLoan(data)
       setResults(calculation)
+      trackFormInteraction('personal-loan', 'complete')
     } catch (error) {
       console.error('Calculation error:', error)
     }

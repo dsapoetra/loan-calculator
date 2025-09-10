@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/Button'
 import { autoLoanSchema, type AutoLoanFormData, creditScorePresets } from '@/lib/schemas'
 import { calculateAutoLoan, formatCurrency, formatPercent, getBIRateBasedInterestRate, getIndonesianBankingInfo } from '@/lib/calculations'
 import ComplianceAlert, { BIRateInfo } from '@/components/ui/ComplianceAlert'
+import { trackCalculatorUsage, trackFormInteraction } from '@/lib/analytics'
 
 export default function AutoLoanCalculator() {
   const [results, setResults] = useState<ReturnType<typeof calculateAutoLoan> | null>(null)
@@ -43,6 +44,18 @@ export default function AutoLoanCalculator() {
     try {
       const calculation = calculateAutoLoan(watchedValues)
       setResults(calculation)
+
+      // Track calculation event
+      if (calculation && watchedValues.vehiclePrice > 0) {
+        const loanAmount = watchedValues.vehiclePrice - watchedValues.downPayment - watchedValues.tradeInValue
+        trackCalculatorUsage(
+          'auto-loan',
+          'calculate',
+          loanAmount,
+          watchedValues.interestRate,
+          watchedValues.loanTermYears
+        )
+      }
     } catch (error) {
       // Only set results to null if there's an error, don't log every validation error
       console.error('Calculation error:', error)
@@ -54,6 +67,7 @@ export default function AutoLoanCalculator() {
     try {
       const calculation = calculateAutoLoan(data)
       setResults(calculation)
+      trackFormInteraction('auto-loan', 'complete')
     } catch (error) {
       console.error('Calculation error:', error)
     }

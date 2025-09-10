@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/Button'
 import InvestmentGrowthChart from '@/components/charts/InvestmentGrowthChart'
 import { investmentSchema, type InvestmentFormData } from '@/lib/schemas'
 import { calculateInvestment, formatCurrency } from '@/lib/calculations'
+import { trackCalculatorUsage, trackFormInteraction } from '@/lib/analytics'
 
 export default function InvestmentCalculator() {
   const [results, setResults] = useState<ReturnType<typeof calculateInvestment> | null>(null)
@@ -42,6 +43,17 @@ export default function InvestmentCalculator() {
     try {
       const calculation = calculateInvestment(watchedValues)
       setResults(calculation)
+
+      // Track calculation event
+      if (calculation && watchedValues.initialInvestment > 0) {
+        trackCalculatorUsage(
+          'investment',
+          'calculate',
+          watchedValues.initialInvestment,
+          watchedValues.interestRate,
+          watchedValues.investmentDurationYears
+        )
+      }
     } catch (error) {
       console.error('Calculation error:', error)
       setResults(null)
@@ -52,6 +64,7 @@ export default function InvestmentCalculator() {
     try {
       const calculation = calculateInvestment(data)
       setResults(calculation)
+      trackFormInteraction('investment', 'complete')
     } catch (error) {
       console.error('Calculation error:', error)
     }
