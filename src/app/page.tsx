@@ -34,7 +34,7 @@ export default function HomePage() {
           </CardHeader>
           <CardContent className="pt-0 mt-auto">
             <Link href="/mortgage">
-              <Button className="w-full">Calculate Mortgage</Button>
+              <Button className="w-full !text-white">Calculate Mortgage</Button>
             </Link>
           </CardContent>
         </Card>
@@ -51,7 +51,7 @@ export default function HomePage() {
           </CardHeader>
           <CardContent className="pt-0 mt-auto">
             <Link href="/auto-loan">
-              <Button className="w-full bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-700">Calculate Auto Loan</Button>
+              <Button className="w-full bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 !text-white">Calculate Auto Loan</Button>
             </Link>
           </CardContent>
         </Card>
@@ -68,7 +68,7 @@ export default function HomePage() {
           </CardHeader>
           <CardContent className="pt-0 mt-auto">
             <Link href="/personal-loan">
-              <Button className="w-full bg-violet-600 hover:bg-violet-700 dark:bg-violet-600 dark:hover:bg-violet-700">Calculate Personal Loan</Button>
+              <Button className="w-full bg-violet-600 hover:bg-violet-700 dark:bg-violet-600 dark:hover:bg-violet-700 !text-white">Calculate Personal Loan</Button>
             </Link>
           </CardContent>
         </Card>
@@ -85,7 +85,7 @@ export default function HomePage() {
           </CardHeader>
           <CardContent className="pt-0 mt-auto">
             <Link href="/investment">
-              <Button className="w-full bg-amber-600 hover:bg-amber-700 dark:bg-amber-600 dark:hover:bg-amber-700">Calculate Investment</Button>
+              <Button className="w-full bg-amber-600 hover:bg-amber-700 dark:bg-amber-600 dark:hover:bg-amber-700 !text-white">Calculate Investment</Button>
             </Link>
           </CardContent>
         </Card>

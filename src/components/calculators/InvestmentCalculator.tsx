@@ -196,7 +196,7 @@ export default function InvestmentCalculator() {
                 </div>
               </div>
 
-              <Button type="submit" className="w-full bg-orange-600 hover:bg-orange-700">
+              <Button type="submit" className="w-full bg-orange-600 hover:bg-orange-700 !text-white">
                 Calculate Investment Growth
               </Button>
             </form>
