@@ -58,7 +58,7 @@ export default function InvestmentCalculator() {
       console.error('Calculation error:', error)
       setResults(null)
     }
-  }, [watchedValues.initialInvestment, watchedValues.monthlyContribution, watchedValues.interestRate, watchedValues.investmentDurationYears, watchedValues.compoundingFrequency, watchedValues.inflationRate, watchedValues])
+  }, [watchedValues.initialInvestment, watchedValues.monthlyContribution, watchedValues.interestRate, watchedValues.investmentDurationYears, watchedValues.compoundingFrequency, watchedValues.inflationRate])
 
   const onSubmit = (data: InvestmentFormData) => {
     try {

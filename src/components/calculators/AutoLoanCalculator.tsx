@@ -61,7 +61,7 @@ export default function AutoLoanCalculator() {
       console.error('Calculation error:', error)
       setResults(null)
     }
-  }, [watchedValues.vehiclePrice, watchedValues.downPayment, watchedValues.tradeInValue, watchedValues.interestRate, watchedValues.loanTermYears, watchedValues.salesTaxRate, watchedValues.additionalFees, watchedValues])
+  }, [watchedValues.vehiclePrice, watchedValues.downPayment, watchedValues.tradeInValue, watchedValues.interestRate, watchedValues.loanTermYears, watchedValues.salesTaxRate, watchedValues.additionalFees])
 
   const onSubmit = (data: AutoLoanFormData) => {
     try {

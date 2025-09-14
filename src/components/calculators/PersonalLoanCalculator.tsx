@@ -57,7 +57,7 @@ export default function PersonalLoanCalculator() {
       console.error('Calculation error:', error)
       setResults(null)
     }
-  }, [watchedValues.loanAmount, watchedValues.interestRate, watchedValues.loanTermMonths, watchedValues.originationFeeRate, watchedValues.monthlyIncome, watchedValues])
+  }, [watchedValues.loanAmount, watchedValues.interestRate, watchedValues.loanTermMonths, watchedValues.originationFeeRate, watchedValues.monthlyIncome])
 
   const onSubmit = (data: PersonalLoanFormData) => {
     try {
