@@ -19,9 +19,11 @@ import { calculateMortgage, formatCurrency, getBIRateBasedInterestRate, getIndon
 import { PDFReportGenerator, downloadPDF } from '@/lib/pdf-generator'
 import { FileDown, Share } from 'lucide-react'
 import { trackCalculatorUsage, trackPDFExport, trackFormInteraction } from '@/lib/analytics'
+import { useTheme } from '@/contexts/ThemeContext'
 
 export default function MortgageCalculator() {
   const searchParams = useSearchParams()
+  const { resolvedTheme } = useTheme()
 
   const defaultValues = useMemo(() => ({
     loanAmount: 1000000000,
@@ -177,9 +179,10 @@ View calculation: ${shareUrl}`
   return (
     <div className="max-w-7xl mx-auto p-6 space-y-6">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Mortgage Calculator</h1>
-        <p className="text-gray-600 mt-2">Calculate your monthly mortgage payment and view detailed amortization</p>
-        <p className="text-sm text-gray-500 mt-1">Compliant with Indonesian Banking Regulations (OJK)</p>
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100" style={{ color: 'var(--foreground)' }}>Mortgage Calculator</h1>
+        <p className="mt-2 text-slate-600 dark:text-slate-300" style={{ color: 'var(--foreground)' }}>Calculate your monthly mortgage payment and view detailed amortization</p>
+        <p className="text-sm mt-1 text-slate-500 dark:text-slate-400" style={{ color: 'var(--muted-foreground)' }}>Compliant with Indonesian Banking Regulations (OJK)</p>
+        <p className="text-xs mt-2 opacity-50">Current theme: {resolvedTheme}</p>
       </div>
 
       {/* BI Rate Information */}
@@ -200,14 +203,14 @@ View calculation: ${shareUrl}`
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {/* BI Rate Preset */}
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-2 block">Indonesian Banking Rates</label>
+                <label className="text-sm font-medium mb-2 block text-slate-700 dark:text-slate-300">Indonesian Banking Rates</label>
                 <div className="grid grid-cols-1 gap-2 mb-3">
                   <Button
                     type="button"
                     variant="outline"
                     size="sm"
                     onClick={handleBIRatePreset}
-                    className="bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100"
+                    className="bg-blue-50 dark:bg-blue-950/50 border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/50"
                   >
                     Use BI Rate + Spread: {bankingInfo.suggestedRates.mortgage}%
                   </Button>
@@ -216,7 +219,7 @@ View calculation: ${shareUrl}`
 
               {/* Credit Score Presets */}
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-2 block">Quick Interest Rate (by Credit Score)</label>
+                <label className="text-sm font-medium mb-2 block">Quick Interest Rate (by Credit Score)</label>
                 <div className="grid grid-cols-2 gap-2">
                   {Object.entries(creditScorePresets).map(([key, preset]) => (
                     <Button
@@ -336,7 +339,7 @@ View calculation: ${shareUrl}`
                 </div>
               </div>
 
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full !text-white">
                 Calculate Mortgage
               </Button>
             </form>
@@ -372,29 +375,29 @@ View calculation: ${shareUrl}`
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="bg-blue-50 p-4 rounded-lg">
-                    <div className="text-2xl font-bold text-blue-700">
+                  <div className="bg-blue-50 dark:bg-blue-950/50 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+                    <div className="text-2xl font-bold text-blue-700 dark:text-blue-300">
                       {formatCurrency(results.monthlyPayment)}
                     </div>
-                    <div className="text-sm text-blue-600">Total Monthly Payment</div>
+                    <div className="text-sm text-blue-600 dark:text-blue-400">Total Monthly Payment</div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-3 bg-gray-50 rounded">
-                      <div className="font-semibold">{formatCurrency(results.principalAndInterest || 0)}</div>
-                      <div className="text-sm text-gray-600">Principal & Interest</div>
+                    <div className="text-center p-3 bg-slate-50 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+                      <div className="font-semibold text-slate-900 dark:text-slate-100">{formatCurrency(results.principalAndInterest || 0)}</div>
+                      <div className="text-sm text-slate-600 dark:text-slate-400">Principal & Interest</div>
                     </div>
-                    <div className="text-center p-3 bg-gray-50 rounded">
-                      <div className="font-semibold">{formatCurrency(results.monthlyTaxes || 0)}</div>
-                      <div className="text-sm text-gray-600">Property Tax</div>
+                    <div className="text-center p-3 bg-slate-50 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+                      <div className="font-semibold text-slate-900 dark:text-slate-100">{formatCurrency(results.monthlyTaxes || 0)}</div>
+                      <div className="text-sm text-slate-600 dark:text-slate-400">Property Tax</div>
                     </div>
-                    <div className="text-center p-3 bg-gray-50 rounded">
-                      <div className="font-semibold">{formatCurrency(results.monthlyInsurance || 0)}</div>
-                      <div className="text-sm text-gray-600">Home Insurance</div>
+                    <div className="text-center p-3 bg-slate-50 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+                      <div className="font-semibold text-slate-900 dark:text-slate-100">{formatCurrency(results.monthlyInsurance || 0)}</div>
+                      <div className="text-sm text-slate-600 dark:text-slate-400">Home Insurance</div>
                     </div>
-                    <div className="text-center p-3 bg-gray-50 rounded">
-                      <div className="font-semibold">{formatCurrency((results.monthlyPMI || 0) + (results.monthlyHOA || 0))}</div>
-                      <div className="text-sm text-gray-600">PMI + HOA</div>
+                    <div className="text-center p-3 bg-slate-50 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+                      <div className="font-semibold text-slate-900 dark:text-slate-100">{formatCurrency((results.monthlyPMI || 0) + (results.monthlyHOA || 0))}</div>
+                      <div className="text-sm text-slate-600 dark:text-slate-400">PMI + HOA</div>
                     </div>
                   </div>
                 </div>

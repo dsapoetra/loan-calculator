@@ -5,10 +5,16 @@ const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
+      data-card
       className={cn(
-        'rounded-lg border border-gray-200 bg-white text-gray-950 shadow-sm',
+        'rounded-lg border shadow-sm transition-colors',
         className
       )}
+      style={{
+        backgroundColor: 'var(--card)',
+        color: 'var(--card-foreground)',
+        borderColor: 'var(--border)'
+      }}
       {...props}
     />
   )
@@ -27,6 +33,7 @@ const CardTitle = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLHeadingEle
     <h3
       ref={ref}
       className={cn('text-2xl font-semibold leading-none tracking-tight', className)}
+      style={{ color: 'var(--card-foreground)' }}
       {...props}
     />
   )
@@ -37,7 +44,8 @@ const CardDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLPara
   ({ className, ...props }, ref) => (
     <p
       ref={ref}
-      className={cn('text-sm text-gray-500', className)}
+      className={cn('text-sm', className)}
+      style={{ color: 'var(--muted-foreground)' }}
       {...props}
     />
   )

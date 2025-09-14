@@ -2,26 +2,323 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+  --input: #ffffff;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
 }
 
-/* Tailwind theme variables */
-:root {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Dark mode variables - Using slate color palette for better harmony */
+.dark {
+  --background: #020617;
+  --foreground: #f8fafc;
+  --card: #0f172a;
+  --card-foreground: #f8fafc;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --border: #334155;
+  --input: #1e293b;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
 }
 
+/* System preference fallback */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not(.light) {
+    --background: #020617;
+    --foreground: #f8fafc;
+    --card: #0f172a;
+    --card-foreground: #f8fafc;
+    --muted: #1e293b;
+    --muted-foreground: #94a3b8;
+    --border: #334155;
+    --input: #1e293b;
+    --primary: #3b82f6;
+    --primary-foreground: #ffffff;
+    --secondary: #1e293b;
+    --secondary-foreground: #f8fafc;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Force dark mode body styles */
+.dark body {
+  background-color: #020617 !important;
+  color: #f8fafc !important;
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Ensure proper styling for cards */
+[data-card] {
+  background-color: var(--card) !important;
+  color: var(--card-foreground) !important;
+  border-color: var(--border) !important;
+}
+
+/* Force dark mode styles when dark class is present */
+.dark [data-card] {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+
+/* Ensure text elements in cards use proper colors */
+[data-card] h1,
+[data-card] h2,
+[data-card] h3,
+[data-card] h4,
+[data-card] h5,
+[data-card] h6 {
+  color: var(--card-foreground) !important;
+}
+
+[data-card] p:not([class*="text-"]),
+[data-card] span:not([class*="text-"]),
+[data-card] div:not([class*="text-"]) {
+  color: var(--card-foreground);
+}
+
+/* Ensure proper styling for specific text elements */
+[data-card] .text-sm:not([class*="text-slate"]):not([class*="text-gray"]):not([class*="text-blue"]):not([class*="text-green"]):not([class*="text-red"]) {
+  color: var(--muted-foreground);
+}
+
+/* Force dark mode text colors */
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+  color: #f8fafc !important;
+}
+
+.dark [data-card] h1,
+.dark [data-card] h2,
+.dark [data-card] h3,
+.dark [data-card] h4,
+.dark [data-card] h5,
+.dark [data-card] h6 {
+  color: #f8fafc !important;
+}
+
+.dark [data-card] p:not([class*="text-"]),
+.dark [data-card] span:not([class*="text-"]),
+.dark [data-card] div:not([class*="text-"]) {
+  color: #f8fafc !important;
+}
+
+/* Force dark mode styling for labels and form elements */
+.dark [data-card] label,
+.dark [data-card] .text-sm,
+.dark [data-card] .text-xs {
+  color: #cbd5e1 !important;
+}
+
+/* Specifically target the Indonesian Banking Rates label and similar elements */
+.dark [data-card] label.text-slate-700,
+.dark [data-card] .text-slate-700 {
+  color: #cbd5e1 !important;
+}
+
+.dark [data-card] label.text-slate-600,
+.dark [data-card] .text-slate-600 {
+  color: #94a3b8 !important;
+}
+
+.dark [data-card] label.text-slate-500,
+.dark [data-card] .text-slate-500 {
+  color: #64748b !important;
+}
+
+/* Force dark mode styling for specific text elements that might not have classes */
+.dark [data-card] > div > div,
+.dark [data-card] > div > span,
+.dark [data-card] > div > p {
+  color: #f8fafc !important;
+}
+
+/* Ensure all text in cards is visible in dark mode */
+.dark [data-card] * {
+  color: inherit;
+}
+
+.dark [data-card] *:not([class*="text-blue"]):not([class*="text-green"]):not([class*="text-red"]):not([class*="text-yellow"]):not([class*="text-purple"]):not([class*="text-indigo"]):not([class*="text-pink"]):not([class*="text-orange"]) {
+  color: #f8fafc !important;
+}
+
+/* Override all slate text colors in dark mode */
+.dark .text-slate-900,
+.dark .text-slate-800,
+.dark .text-slate-700,
+.dark .text-slate-600,
+.dark .text-slate-500,
+.dark .text-slate-400 {
+  color: #cbd5e1 !important;
+}
+
+.dark .text-slate-300,
+.dark .text-slate-200,
+.dark .text-slate-100 {
+  color: #f8fafc !important;
+}
+
+/* Fix input fields and form elements in dark mode */
+.dark input,
+.dark select,
+.dark textarea {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #475569 !important;
+}
+
+.dark input::placeholder,
+.dark select::placeholder,
+.dark textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Fix result display boxes */
+.dark [data-card] .bg-blue-50,
+.dark [data-card] .bg-gray-50,
+.dark [data-card] .bg-slate-50,
+.dark [data-card] .bg-white,
+.dark [data-card] .bg-green-50 {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+/* Fix all light background colors in dark mode */
+.dark .bg-gray-50,
+.dark .bg-slate-50,
+.dark .bg-blue-50,
+.dark .bg-green-50,
+.dark .bg-red-50,
+.dark .bg-yellow-50,
+.dark .bg-purple-50,
+.dark .bg-indigo-50,
+.dark .bg-pink-50,
+.dark .bg-orange-50,
+.dark .bg-white {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+/* Fix colored text that might be invisible on dark backgrounds */
+.dark .text-green-700,
+.dark .text-green-600,
+.dark .text-blue-700,
+.dark .text-blue-600,
+.dark .text-red-700,
+.dark .text-red-600 {
+  color: #f8fafc !important;
+}
+
+/* Ensure all form elements have proper dark mode styling */
+.dark input[type="text"],
+.dark input[type="number"],
+.dark input[type="email"],
+.dark input[type="password"],
+.dark select,
+.dark textarea {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #475569 !important;
+}
+
+/* Force dark mode for any remaining white backgrounds */
+.dark div:not([class*="text-"]):not([class*="border-"]) {
+  background-color: inherit;
+}
+
+/* Specific fix for result display boxes with white backgrounds */
+.dark [style*="background-color: white"],
+.dark [style*="background-color: #ffffff"],
+.dark [style*="background-color: #fff"] {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+/* Fix credit score guide boxes and similar light colored backgrounds */
+.dark .bg-amber-50,
+.dark .bg-amber-100,
+.dark .bg-yellow-100,
+.dark .bg-orange-50,
+.dark .bg-orange-100,
+.dark .bg-lime-50,
+.dark .bg-lime-100,
+.dark .bg-emerald-50,
+.dark .bg-emerald-100,
+.dark .bg-teal-50,
+.dark .bg-teal-100,
+.dark .bg-cyan-50,
+.dark .bg-cyan-100,
+.dark .bg-sky-50,
+.dark .bg-sky-100,
+.dark .bg-violet-50,
+.dark .bg-violet-100,
+.dark .bg-fuchsia-50,
+.dark .bg-fuchsia-100,
+.dark .bg-rose-50,
+.dark .bg-rose-100 {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+/* Fix any remaining light backgrounds that might cause invisible text */
+.dark [class*="bg-"][class*="50"],
+.dark [class*="bg-"][class*="100"]:not([class*="bg-gray-"]):not([class*="bg-slate-"]) {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+/* Specific fix for credit score guide boxes */
+.dark .bg-emerald-50 {
+  background-color: rgba(6, 78, 59, 0.3) !important;
+}
+
+.dark .bg-blue-50 {
+  background-color: rgba(30, 58, 138, 0.3) !important;
+}
+
+.dark .bg-amber-50 {
+  background-color: rgba(120, 53, 15, 0.3) !important;
+}
+
+.dark .bg-orange-50 {
+  background-color: rgba(154, 52, 18, 0.3) !important;
+}
+
+.dark .bg-red-50 {
+  background-color: rgba(153, 27, 27, 0.3) !important;
+}
+
+/* Ensure all text in these boxes is visible */
+.dark .bg-emerald-50 *,
+.dark .bg-blue-50 *,
+.dark .bg-amber-50 *,
+.dark .bg-orange-50 *,
+.dark .bg-red-50 * {
+  color: #f8fafc !important;
 }

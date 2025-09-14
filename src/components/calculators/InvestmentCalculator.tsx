@@ -83,8 +83,8 @@ export default function InvestmentCalculator() {
   return (
     <div className="max-w-7xl mx-auto p-6 space-y-6">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Investment Calculator</h1>
-        <p className="text-gray-600 mt-2">Project your investment growth with compound interest and inflation adjustments</p>
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">Investment Calculator</h1>
+        <p className="mt-2 text-slate-600 dark:text-slate-300">Project your investment growth with compound interest and inflation adjustments</p>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-6">

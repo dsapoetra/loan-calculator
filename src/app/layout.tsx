@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navigation from "@/components/Navigation";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import "./globals.css";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import PageTracker from '@/components/PageTracker'
@@ -29,16 +30,18 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50 dark:bg-slate-950 transition-colors`}
       >
-        <PageTracker />
-        <Navigation />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        {gaId && <GoogleAnalytics gaId={gaId} />}
+        <ThemeProvider>
+          <PageTracker />
+          <Navigation />
+          <main className="min-h-screen">
+            {children}
+          </main>
+          {gaId && <GoogleAnalytics gaId={gaId} />}
+        </ThemeProvider>
       </body>
     </html>
   );

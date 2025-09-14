@@ -87,9 +87,9 @@ export default function PersonalLoanCalculator() {
   return (
     <div className="max-w-7xl mx-auto p-6 space-y-6">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Personal Loan Calculator</h1>
-        <p className="text-gray-600 mt-2">Calculate personal loan payments with origination fees and debt-to-income analysis</p>
-        <p className="text-sm text-gray-500 mt-1">Compliant with Indonesian Banking Regulations (OJK)</p>
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">Personal Loan Calculator</h1>
+        <p className="mt-2 text-slate-600 dark:text-slate-300">Calculate personal loan payments with origination fees and debt-to-income analysis</p>
+        <p className="text-sm mt-1 text-slate-500 dark:text-slate-400">Compliant with Indonesian Banking Regulations (OJK)</p>
       </div>
 
       {/* BI Rate Information */}
@@ -110,14 +110,14 @@ export default function PersonalLoanCalculator() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {/* BI Rate Preset */}
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-2 block">Indonesian Banking Rates</label>
+                <label className="text-sm font-medium mb-2 block text-slate-700 dark:text-slate-300">Indonesian Banking Rates</label>
                 <div className="grid grid-cols-1 gap-2 mb-3">
                   <Button
                     type="button"
                     variant="outline"
                     size="sm"
                     onClick={handleBIRatePreset}
-                    className="bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100"
+                    className="bg-blue-50 dark:bg-blue-950/50 border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/50"
                   >
                     Use BI Rate + Spread: {bankingInfo.suggestedRates.personalLoan}%
                   </Button>
@@ -126,7 +126,7 @@ export default function PersonalLoanCalculator() {
 
               {/* Credit Score Presets */}
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-2 block">Quick Interest Rate (by Credit Score)</label>
+                <label className="text-sm font-medium mb-2 block">Quick Interest Rate (by Credit Score)</label>
                 <div className="grid grid-cols-2 gap-2">
                   {Object.entries(creditScorePresets).map(([key, preset]) => (
                     <Button
@@ -225,7 +225,7 @@ export default function PersonalLoanCalculator() {
                 </div>
               </div>
 
-              <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700">
+              <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 !text-white">
                 Calculate Personal Loan
               </Button>
             </form>
@@ -314,23 +314,23 @@ export default function PersonalLoanCalculator() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-slate-700 dark:text-slate-300">
                     <span>Principal Amount:</span>
                     <span>{formatCurrency(watchedValues.loanAmount)}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-slate-700 dark:text-slate-300">
                     <span>Origination Fee ({watchedValues.originationFeeRate}%):</span>
                     <span>{formatCurrency(originationFee)}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-slate-700 dark:text-slate-300">
                     <span>Total Interest:</span>
                     <span>{formatCurrency(results.totalInterest)}</span>
                   </div>
-                  <div className="flex justify-between border-t pt-2 font-bold text-lg">
+                  <div className="flex justify-between border-t pt-2 font-bold text-lg text-slate-900 dark:text-slate-100">
                     <span>Total Cost:</span>
                     <span>{formatCurrency(results.totalCost)}</span>
                   </div>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-sm text-slate-500 dark:text-slate-400">
                     You&apos;ll pay {formatCurrency(results.totalInterest + originationFee)} in interest and fees
                   </div>
                 </div>

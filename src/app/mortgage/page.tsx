@@ -10,10 +10,10 @@ function MortgageCalculatorFallback() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="animate-pulse">
-        <div className="h-8 bg-gray-200 rounded w-1/3 mb-6"></div>
+        <div className="h-8 bg-slate-200 dark:bg-slate-700 rounded w-1/3 mb-6"></div>
         <div className="grid lg:grid-cols-2 gap-6">
-          <div className="bg-gray-200 rounded-lg h-96"></div>
-          <div className="bg-gray-200 rounded-lg h-96"></div>
+          <div className="bg-slate-200 dark:bg-slate-700 rounded-lg h-96"></div>
+          <div className="bg-slate-200 dark:bg-slate-700 rounded-lg h-96"></div>
         </div>
       </div>
     </div>
