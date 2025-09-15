@@ -239,19 +239,19 @@ export default function HomePage() {
       </Card>
 
       {/* Get Started CTA */}
-      <div className="text-center bg-gradient-to-r from-blue-600 to-blue-700 dark:from-slate-700 dark:to-slate-800 text-white rounded-lg p-8 transition-all duration-200 shadow-lg">
+      <div className="text-center bg-gradient-to-r from-slate-400 to-slate-900 dark:from-slate-700 dark:to-slate-800 text-white rounded-lg p-8 transition-all duration-200 shadow-lg">
         <h2 className="text-2xl font-bold mb-4 text-white">Ready to Calculate Your Loan?</h2>
         <p className="mb-6 text-white/90 dark:text-white/90">
           Choose from our comprehensive calculators to make informed financial decisions
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/mortgage">
-            <Button variant="outline" className="bg-white/90 !text-blue-700 border-white/90 hover:bg-white hover:shadow-md dark:bg-slate-100 dark:!text-blue-700 dark:border-slate-100 dark:hover:bg-white transition-all duration-200">
+            <Button variant="outline" className="bg-white/90 !text-white-100 border-white/90 hover:bg-white hover:shadow-md dark:bg-slate-100 dark:!text-blue-700 dark:border-slate-100 dark:hover:bg-white transition-all duration-200">
               Start with Mortgage
             </Button>
           </Link>
           <Link href="/auto-loan">
-            <Button variant="outline" className="bg-white/90 !text-blue-700 border-white/90 hover:bg-white hover:shadow-md dark:bg-slate-100 dark:!text-blue-700 dark:border-slate-100 dark:hover:bg-white transition-all duration-200">
+            <Button variant="outline" className="bg-white/90 !text-white-100 border-white/90 hover:bg-white hover:shadow-md dark:bg-slate-100 dark:!text-blue-700 dark:border-slate-100 dark:hover:bg-white transition-all duration-200">
               Calculate Auto Loan
             </Button>
           </Link>
