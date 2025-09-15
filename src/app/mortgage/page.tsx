@@ -1,9 +1,34 @@
 import { Suspense } from 'react'
 import MortgageCalculator from '@/components/calculators/MortgageCalculator'
+import { CalculatorStructuredData } from '@/components/StructuredData'
 
 export const metadata = {
-  title: 'Mortgage Calculator - Calculate Monthly Payments & Amortization',
-  description: 'Calculate mortgage payments with our comprehensive mortgage calculator. View amortization schedules, payment breakdowns, and loan-to-value ratios.'
+  title: 'Free Mortgage Calculator - Calculate Monthly Payments & Amortization Schedule',
+  description: 'Calculate mortgage payments instantly with our free mortgage calculator. View detailed amortization schedules, payment breakdowns, loan-to-value ratios, and total interest costs. Perfect for home buyers and refinancing.',
+  keywords: 'mortgage calculator, home loan calculator, mortgage payment calculator, amortization schedule, mortgage rates, home loan payments, refinance calculator, loan to value ratio',
+  openGraph: {
+    title: 'Free Mortgage Calculator - Calculate Monthly Payments & Amortization',
+    description: 'Calculate mortgage payments instantly with detailed amortization schedules and payment breakdowns.',
+    type: 'website',
+    url: 'https://your-domain.com/mortgage',
+    images: [
+      {
+        url: 'https://your-domain.com/og-mortgage.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Mortgage Calculator - Home Loan Payment Calculator',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Free Mortgage Calculator - Calculate Monthly Payments',
+    description: 'Calculate mortgage payments instantly with detailed amortization schedules.',
+    images: ['https://your-domain.com/og-mortgage.jpg'],
+  },
+  alternates: {
+    canonical: 'https://your-domain.com/mortgage',
+  },
 }
 
 function MortgageCalculatorFallback() {
@@ -22,8 +47,23 @@ function MortgageCalculatorFallback() {
 
 export default function MortgagePage() {
   return (
-    <Suspense fallback={<MortgageCalculatorFallback />}>
-      <MortgageCalculator />
-    </Suspense>
+    <>
+      <CalculatorStructuredData
+        name="Mortgage Calculator"
+        url="https://your-domain.com/mortgage"
+        description="Calculate mortgage payments instantly with our free mortgage calculator. View detailed amortization schedules, payment breakdowns, and loan-to-value ratios."
+        features={[
+          'Monthly Payment Calculation',
+          'Amortization Schedule',
+          'Payment Breakdown',
+          'Loan-to-Value Ratio',
+          'Total Interest Calculation',
+          'PDF Report Generation'
+        ]}
+      />
+      <Suspense fallback={<MortgageCalculatorFallback />}>
+        <MortgageCalculator />
+      </Suspense>
+    </>
   )
 }

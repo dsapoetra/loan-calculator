@@ -2,26 +2,72 @@ import Link from 'next/link'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Calculator, Home, Car, User, TrendingUp, BarChart3, Share, FileText } from 'lucide-react'
+import { Metadata } from 'next'
+import { OrganizationStructuredData, WebApplicationStructuredData, FAQStructuredData } from '@/components/StructuredData'
+
+export const metadata: Metadata = {
+  title: 'Free Loan Calculator - Mortgage, Auto, Personal & Investment Calculators',
+  description: 'Calculate loan payments instantly with our free comprehensive calculators. Get mortgage, auto loan, personal loan, and investment calculations with detailed amortization schedules, interactive charts, and PDF reports.',
+  keywords: 'loan calculator, mortgage calculator, auto loan calculator, personal loan calculator, investment calculator, amortization schedule, loan payment calculator, free financial calculator',
+  openGraph: {
+    title: 'Free Loan Calculator - Mortgage, Auto, Personal & Investment Calculators',
+    description: 'Calculate loan payments instantly with our free comprehensive calculators. Get detailed amortization schedules, interactive charts, and PDF reports.',
+    type: 'website',
+    url: 'https://your-domain.com',
+    images: [
+      {
+        url: 'https://your-domain.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Loan Calculator - Financial Planning Tools',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Free Loan Calculator - Mortgage, Auto, Personal & Investment Calculators',
+    description: 'Calculate loan payments instantly with our free comprehensive calculators.',
+    images: ['https://your-domain.com/og-image.jpg'],
+  },
+  alternates: {
+    canonical: 'https://your-domain.com',
+  },
+}
 
 export default function HomePage() {
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <>
+      <OrganizationStructuredData />
+      <WebApplicationStructuredData />
+      <FAQStructuredData />
+      <div className="max-w-7xl mx-auto p-6">
       {/* Hero Section */}
-      <div className="text-center py-12 mb-12">
+      <section className="text-center py-12 mb-12" aria-labelledby="hero-heading">
         <div className="flex justify-center items-center mb-6">
-          <Calculator className="h-16 w-16 text-blue-600 dark:text-blue-400 mr-4" />
-          <h1 className="text-4xl md:text-5xl font-bold">
-            Comprehensive Loan Calculators
+          <Calculator className="h-16 w-16 text-blue-600 dark:text-blue-400 mr-4" aria-hidden="true" />
+          <h1 id="hero-heading" className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100">
+            Free Comprehensive Loan Calculators
           </h1>
         </div>
-        <p className="text-xl max-w-3xl mx-auto">
+        <p className="text-xl max-w-3xl mx-auto text-slate-700 dark:text-slate-300 leading-relaxed">
           Make informed financial decisions with our suite of professional loan calculators.
           Calculate payments, view amortization schedules, and compare scenarios with interactive charts and reports.
+          <strong> 100% free, no registration required.</strong>
         </p>
-      </div>
+        <div className="mt-8 flex flex-wrap justify-center gap-4 text-sm text-slate-600 dark:text-slate-400">
+          <span className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-3 py-1 rounded-full">✓ Instant Results</span>
+          <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-3 py-1 rounded-full">✓ PDF Reports</span>
+          <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 px-3 py-1 rounded-full">✓ Interactive Charts</span>
+          <span className="bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-300 px-3 py-1 rounded-full">✓ Mobile Friendly</span>
+        </div>
+      </section>
 
       {/* Calculator Cards */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+      <section className="mb-12" aria-labelledby="calculators-heading">
+        <h2 id="calculators-heading" className="text-3xl font-bold text-center mb-8 text-slate-900 dark:text-slate-100">
+          Choose Your Calculator
+        </h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card className="hover:shadow-lg dark:hover:shadow-xl transition-all duration-200 flex flex-col h-full border-slate-200 dark:border-slate-700">
           <CardHeader className="flex-grow">
             <div className="flex items-center justify-center w-12 h-12 bg-blue-50 dark:bg-blue-950/50 rounded-lg mb-4 border border-blue-100 dark:border-blue-900/50">
@@ -89,11 +135,13 @@ export default function HomePage() {
             </Link>
           </CardContent>
         </Card>
-      </div>
+        </div>
+      </section>
 
       {/* Features Section */}
-      <div className="bg-white dark:bg-slate-900 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 p-8 mb-12 transition-colors">
-        <h2 className="text-3xl font-bold text-center mb-8 text-slate-900 dark:text-slate-100">Powerful Features</h2>
+      <section className="mb-12" aria-labelledby="features-heading">
+      <div className="bg-white dark:bg-slate-900 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 p-8 transition-colors">
+        <h2 id="features-heading" className="text-3xl font-bold text-center mb-8 text-slate-900 dark:text-slate-100">Powerful Features</h2>
         <div className="grid md:grid-cols-3 gap-8">
           <div className="text-center flex flex-col items-center">
             <div className="flex items-center justify-center w-16 h-16 bg-blue-50 dark:bg-blue-950/50 rounded-lg mb-4 border border-blue-100 dark:border-blue-900/50">
@@ -126,13 +174,58 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="mb-12" aria-labelledby="faq-heading">
+        <div className="bg-slate-50 dark:bg-slate-800/50 rounded-lg p-8">
+          <h2 id="faq-heading" className="text-3xl font-bold text-center mb-8 text-slate-900 dark:text-slate-100">
+            Frequently Asked Questions
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div>
+              <h3 className="text-lg font-semibold mb-2 text-slate-900 dark:text-slate-100">
+                Are these loan calculators free to use?
+              </h3>
+              <p className="text-slate-600 dark:text-slate-300 mb-4">
+                Yes, all our loan calculators are completely free to use. No registration, no hidden fees, no limits on usage.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-2 text-slate-900 dark:text-slate-100">
+                How accurate are the calculations?
+              </h3>
+              <p className="text-slate-600 dark:text-slate-300 mb-4">
+                Our calculators use standard financial formulas and are highly accurate. However, actual loan terms may vary based on lender policies and your creditworthiness.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-2 text-slate-900 dark:text-slate-100">
+                Can I save or print my calculations?
+              </h3>
+              <p className="text-slate-600 dark:text-slate-300 mb-4">
+                Yes, you can generate PDF reports of your calculations and save them for your records or share with financial advisors.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-2 text-slate-900 dark:text-slate-100">
+                Do you store my financial information?
+              </h3>
+              <p className="text-slate-600 dark:text-slate-300 mb-4">
+                No, all calculations are performed in your browser. We don&apos;t store or transmit any of your financial information.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Credit Score Guide */}
-      <Card className="mb-12">
+      <section className="mb-12" aria-labelledby="credit-guide-heading">
+      <Card>
         <CardHeader>
-          <CardTitle>Interest Rate Guide by Credit Score</CardTitle>
-          <CardDescription>
-            Typical interest rates you might qualify for based on your credit score range
+          <CardTitle id="credit-guide-heading" className="text-2xl">Interest Rate Guide by Credit Score</CardTitle>
+          <CardDescription className="text-base">
+            Typical interest rates you might qualify for based on your credit score range. Use this as a general guide when calculating your loans.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -237,13 +330,16 @@ export default function HomePage() {
           </p>
         </CardContent>
       </Card>
+      </section>
 
       {/* Get Started CTA */}
-      <div className="text-center bg-gradient-to-r from-slate-400 to-slate-900 dark:from-slate-700 dark:to-slate-800 text-white rounded-lg p-8 transition-all duration-200 shadow-lg">
-        <h2 className="text-2xl font-bold mb-4 text-white">Ready to Calculate Your Loan?</h2>
-        <p className="mb-6 text-white/90 dark:text-white/90">
-          Choose from our comprehensive calculators to make informed financial decisions
-        </p>
+      <section className="text-center" aria-labelledby="cta-heading">
+        <div className="bg-gradient-to-r from-slate-400 to-slate-900 dark:from-slate-700 dark:to-slate-800 text-white rounded-lg p-8 transition-all duration-200 shadow-lg">
+          <h2 id="cta-heading" className="text-2xl font-bold mb-4 text-white">Ready to Calculate Your Loan?</h2>
+          <p className="mb-6 text-white/90 dark:text-white/90">
+            Choose from our comprehensive calculators to make informed financial decisions.
+            <strong> Start calculating now - it&apos;s completely free!</strong>
+          </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/mortgage">
             <Button variant="outline" className="bg-white/90 !text-white-100 border-white/90 hover:bg-white hover:shadow-md dark:bg-slate-100 dark:!text-blue-700 dark:border-slate-100 dark:hover:bg-white transition-all duration-200">
@@ -257,6 +353,8 @@ export default function HomePage() {
           </Link>
         </div>
       </div>
+      </section>
     </div>
+    </>
   )
 }
